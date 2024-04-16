@@ -1,0 +1,223 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Test API",
+        "description": "My API test persons",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost"
+        }
+    ],
+    "paths": {
+        "/api/validateCP/{postalCode}": {
+            "get": {
+                "tags": [
+                    "Copomex"
+                ],
+                "summary": "Validate Postal code and get state",
+                "operationId": "3c3b3149d33a80283dc52535f3b5d3ef",
+                "parameters": [
+                    {
+                        "name": "postalCode",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "BAD REQUEST."
+                    }
+                }
+            }
+        },
+        "/api/person": {
+            "get": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Get all persons.",
+                "operationId": "74d719561741d8f0cf67db2cd1664ca1",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "default": "1"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Size",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "default": "10",
+                            "enum": [
+                                5,
+                                10,
+                                25
+                            ]
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "query",
+                        "description": "Order by",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "name",
+                                "surname",
+                                "second_surname",
+                                "email",
+                                "phone_number",
+                                "postal_code",
+                                "state"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "orderOperator",
+                        "in": "query",
+                        "description": "Order operator",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "DESC",
+                                "ASC"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "BAD REQUEST."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Crete new person.",
+                "operationId": "e3fa321f1f16f618321269761b9dce45",
+                "requestBody": {
+                    "description": "Register person",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/person"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Test sesion."
+                    },
+                    "400": {
+                        "description": "BAD REQUEST."
+                    }
+                }
+            }
+        },
+        "/api/person/{id}": {
+            "delete": {
+                "tags": [
+                    "Person"
+                ],
+                "summary": "Delete person.",
+                "operationId": "05193f8fab9847a46b83fc7584ac35f0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Person id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Test sesion."
+                    },
+                    "202": {
+                        "description": "This id not exists"
+                    },
+                    "400": {
+                        "description": "BAD REQUEST."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "person": {
+                "required": [
+                    "mobile_no"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "myName"
+                    },
+                    "surname": {
+                        "type": "string",
+                        "example": "mySurname"
+                    },
+                    "second_surname": {
+                        "type": "string",
+                        "example": "mySecondSurname"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "email@email.com"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "example": "8712345678"
+                    },
+                    "postal_code": {
+                        "type": "string",
+                        "example": "27000"
+                    },
+                    "state": {
+                        "type": "string",
+                        "example": "Coahuila de Zaragoza"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

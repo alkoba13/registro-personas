@@ -1,0 +1,9 @@
+app/node_modules
+
+api/vendor
+api/.env
+
+.vscode
+.DS_Store
+
+.idea/
