@@ -1,0 +1,55 @@
+<div>
+    <h2>Lista de Personas</h2>
+    <div><button (click)="onSearch()">Nueva persona</button></div>
+    <div>
+      <input type="text" placeholder="Buscar..." [(ngModel)]="searchQuery" (keyup.enter)="onSearch()">
+      <button (click)="onSearch()">Buscar</button>
+      <label>Ordenar por:</label>
+      <select [(ngModel)]="orderBy" (change)="onOrderBy($event)">
+        <option value="name" default>Nombre</option>
+        <option value="surname">Apellido Paterno</option>
+        <option value="second_surname">Apellido Materno</option>
+        <option value="email">E-Mail</option>
+        <option value="phone_number">Telefono</option>
+        <option value="postal_code">Codigo Postal</option>
+        <option value="state">Estado</option>
+      </select>
+      <select [(ngModel)]="orderOperator" (change)="onOrderOperator($event)">
+        <option value="ASC">Ascendente</option>
+        <option value="DESC">Descendente</option>
+      </select>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>E-Mail</th>
+          <th>Telefono</th>
+          <th>Codigo postal</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of persons">
+          <td>{{ person.name }}</td>
+          <td>{{ person.surname }}</td>
+          <td>{{ person.second_surname }}</td>
+          <td>{{ person.email }}</td>
+          <td>{{ person.phone_number }}</td>
+          <td>{{ person.postal_code }}</td>
+          <td>{{ person.state }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+      <button (click)="onPageChange(currentPage + 1)" [disabled]="persons.length < pageSize">Siguiente</button>
+      <select [(ngModel)]="pageSize" (change)="onSizeChange($event)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="25">25</option>
+      </select>
+    </div>
+  </div>
